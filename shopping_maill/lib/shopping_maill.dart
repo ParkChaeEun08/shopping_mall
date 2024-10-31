@@ -1,6 +1,6 @@
 import 'dart:io';
 
-class Product extends ShoppingMall {
+class Product {
   late String name;
   late int price;
 
@@ -8,56 +8,55 @@ class Product extends ShoppingMall {
 
   @override
   String toString() {
-    return 'name / {price}원';
+    return '$name / ${price}원';
   }
+}
 
-  List<Product> products = [
-    Product('셔츠', 45000),
+class ShoppingMall {
+  List<Product> productList = [
+     Product('셔츠', 45000),
     Product('원피스', 30000),
     Product('반팔티', 35000),
     Product('반바지', 38000),
     Product('양말', 5000)
   ];
-}
-
-class ShoppingMall {
-  List<Product> productList = [];
   List<Product> cart = [];
   int totalPrice = 0;
+
+  void showProducts() {
+    for (var product in productList) {
+      print('${product.name} / ${product.price}원');
+    }
+  }
+
+  void addTocart() {
+    print('상품 이름을 입력하세요:');
+    String? productName = stdin.readLineSync();
+    print('상품 개수를 입력하세요.:');
+    String? productCountStr = stdin.readLineSync();
+    int? productCont = int.tryParse(productCountStr ?? '');
+
+    if (productName == null || productCont == null) {
+      print('입력값이 올바르지 않아요!');
+      return;
+    }
+
+    if (productCont <= 0) {
+      print('0개보다 많은 개수의 상품만 담을 수 있어요!');
+      return;
+    }
+  }
+
+  void showTotalPrice() {
+    print('장바구니에 totalPrice원 어치를 담으셨네요!'); // 수정 필요
+  }
+}
 } // ShoppingMall 클래스, 상품을 정의하기 위한 Product 클래스 정의 , 판매하는 상품 목록 (List<Product>)
 
-void showProducts() {
-  /*
-  for (var pro in product.products) {
-    print(pro);
-  }
-  */
-}
-
 // 상품목록을 출력하는 매서드 showProducts()
-void addTocart() {
-  print('상품 이름을 입력하세요:');
-  String? productName = stdin.readLineSync();
-  print('상품 개수를 입력하세요.:');
-  String? productCountStr = stdin.readLineSync();
-  int? productCont = int.tryParse(productCountStr ?? '');
-
-  if (productName == null || productCont == null) {
-    print('입력값이 올바르지 않아요!');
-    return;
-  }
-
-  if (productCont <= 0) {
-    print('0개보다 많은 개수의 상품만 담을 수 있어요!');
-    return;
-  }
-}
-
-void showTotalPrice() {
-  print('장바구니에 totalPrice원 어치를 담으셨네요!'); // 수정 필요
-}
 
 void main() {
+  Product products = product();
   bool running = true;
 
   while (running) {
