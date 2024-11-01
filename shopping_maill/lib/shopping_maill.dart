@@ -45,10 +45,26 @@ class ShoppingMall {
       print('0개보다 많은 개수의 상품만 담을 수 있어요!');
       return;
     }
+
+    Product? product = productList.firstWhere(
+        (product) => product.name == productName,
+        orElse: () => Product('', 0));
+
+    if (product.name == "") {
+      print('존재하지 않는 상품입니다!');
+      return;
+    }
+
+    for (int i = 0; i < productCont; i++) {
+      cart.add(product);
+      totalPrice += product.price;
+    }
+
+    print('$productCont개의 $productName이(가) 장바구니에 담겼어요!');
   }
 
   void showTotalPrice() {
-    print('장바구니에 totalPrice원 어치를 담으셨네요!'); // 수정 필요
+    print('장바구니에 ${totalPrice}원 어치를 담으셨네요!'); // 수정 필요
   }
 }
 // ShoppingMall 클래스, 상품을 정의하기 위한 Product 클래스 정의 , 판매하는 상품 목록 (List<Product>)
