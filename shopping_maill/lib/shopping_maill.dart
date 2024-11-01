@@ -14,7 +14,7 @@ class Product {
 
 class ShoppingMall {
   List<Product> productList = [
-     Product('셔츠', 45000),
+    Product('셔츠', 45000),
     Product('원피스', 30000),
     Product('반팔티', 35000),
     Product('반바지', 38000),
@@ -51,12 +51,11 @@ class ShoppingMall {
     print('장바구니에 totalPrice원 어치를 담으셨네요!'); // 수정 필요
   }
 }
-} // ShoppingMall 클래스, 상품을 정의하기 위한 Product 클래스 정의 , 판매하는 상품 목록 (List<Product>)
-
+// ShoppingMall 클래스, 상품을 정의하기 위한 Product 클래스 정의 , 판매하는 상품 목록 (List<Product>)
 // 상품목록을 출력하는 매서드 showProducts()
 
 void main() {
-  Product products = product();
+  ShoppingMall shoppingMall = ShoppingMall();
   bool running = true;
 
   while (running) {
@@ -66,15 +65,15 @@ void main() {
 
     switch (choice) {
       case '1':
-        showProducts();
+        shoppingMall.showProducts();
         break;
 
       case '2':
-        addTocart();
+        shoppingMall.addTocart();
         break;
 
       case '3':
-        showTotalPrice();
+        shoppingMall.showTotalPrice();
         break;
 
       case '4':
